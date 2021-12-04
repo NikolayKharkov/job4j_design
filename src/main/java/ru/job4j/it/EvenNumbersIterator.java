@@ -12,16 +12,12 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         this.data = data;
     }
 
-    private boolean checkIsEven(int index) {
-        return data[index] % 2 == 0;
-    }
-
     @Override
     public boolean hasNext() {
         while (index < data.length && data[index] % 2 != 0) {
             index++;
         }
-        return data[index] % 2 == 0 && index < data.length;
+        return index < data.length && data[index] % 2 == 0;
     }
 
     @Override
