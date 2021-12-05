@@ -14,16 +14,17 @@ public class SimpleArrayList<T> implements List<T> {
 
     private int modCount = 0;
 
-    int expectedModCount = 0;
+    private int expectedModCount = 0;
 
-    int iteratorSize = 0;
+    private int iteratorSize = 0;
 
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
 
     private T[] grow() {
-        return Arrays.copyOf(container, container.length * 2);
+        return this.container.length == 0
+                ? Arrays.copyOf(container, 1) : Arrays.copyOf(container, container.length * 2);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class SimpleArrayList<T> implements List<T> {
                 index,
                 container.length - index - 1
         );
-        container[size] = null;
+        container[size - 1] = null;
         size--;
         modCount++;
         return result;
