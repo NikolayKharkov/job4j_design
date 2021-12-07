@@ -18,6 +18,10 @@ public class SimpleArrayList<T> implements List<T> {
 
     private int iteratorSize = 0;
 
+    public SimpleArrayList() {
+        this.container = (T[]) new Object[10];
+    }
+
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
     }
