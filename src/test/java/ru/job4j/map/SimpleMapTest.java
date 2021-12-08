@@ -57,7 +57,7 @@ public class SimpleMapTest {
     public void whenDoublePutThenGetAndReturnNull() {
         map.put("Test1", 1);
         map.put("Test2", 2);
-        Assert.assertNull(map.get("Test3"));
+        Assert.assertNull(map.get("Test5"));
     }
 
     @Test

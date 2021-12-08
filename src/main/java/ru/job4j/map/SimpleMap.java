@@ -21,7 +21,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
-        if ((float) count / (float) capacity >= LOAD_FACTOR) {
+        if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
         int indexPut = key == null ? 0 : indexFor(hash(key.hashCode()));
@@ -44,26 +44,32 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private void expand() {
         capacity *= 2;
-        MapEntry<K, V>[] expandbleTable = new MapEntry[capacity];
+        MapEntry<K, V>[] expandableTable = new MapEntry[capacity];
         for (MapEntry<K, V> el : table) {
             if (el != null) {
-                expandbleTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()))] = el;
+                expandableTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()))] = el;
             }
         }
-        table = expandbleTable;
+        table = expandableTable;
     }
 
     @Override
     public V get(K key) {
+        V result = null;
         int indexGet = key == null ? 0 : indexFor(hash(key.hashCode()));
-        return table[indexGet] == null ? null : table[indexGet].value;
+        if (table[indexGet] != null
+                && (table[indexGet].key == key || key.equals(table[indexGet].key))) {
+            result = table[indexGet].value;
+        }
+        return result;
     }
 
     @Override
     public boolean remove(K key) {
         boolean result = false;
         int indexRemove = key == null ? 0 : indexFor(hash(key.hashCode()));
-        if (table[indexRemove] != null) {
+        if (table[indexRemove] != null
+                && (table[indexRemove].key == key || key.equals(table[indexRemove].key))) {
             table[indexRemove] = null;
             count--;
             modCount++;
