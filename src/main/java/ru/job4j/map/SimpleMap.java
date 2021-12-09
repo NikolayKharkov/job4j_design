@@ -3,6 +3,7 @@ package ru.job4j.map;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
 
@@ -10,7 +11,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private int iteratorSize = 0;
 
-    private int capacity = 8;
+    public int capacity = 8;
 
     private int count = 0;
 
@@ -39,7 +40,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash & (table.length - 1);
+        return hash & (capacity - 1);
+    }
+
+    private int indexFor(int hash, int capacity) {
+        return hash & (capacity - 1);
     }
 
     private void expand() {
@@ -47,7 +52,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] expandableTable = new MapEntry[capacity];
         for (MapEntry<K, V> el : table) {
             if (el != null) {
-                expandableTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()))] = el;
+                expandableTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()), capacity)] = el;
             }
         }
         table = expandableTable;
@@ -57,8 +62,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V result = null;
         int indexGet = key == null ? 0 : indexFor(hash(key.hashCode()));
-        if (table[indexGet] != null
-                && (table[indexGet].key == key || key.equals(table[indexGet].key))) {
+        if (table[indexGet] != null && Objects.equals(table[indexGet].key, key)) {
             result = table[indexGet].value;
         }
         return result;
@@ -68,8 +72,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         boolean result = false;
         int indexRemove = key == null ? 0 : indexFor(hash(key.hashCode()));
-        if (table[indexRemove] != null
-                && (table[indexRemove].key == key || key.equals(table[indexRemove].key))) {
+        if (table[indexRemove] != null && Objects.equals(table[indexRemove].key, key)) {
             table[indexRemove] = null;
             count--;
             modCount++;

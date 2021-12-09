@@ -87,10 +87,6 @@ public class SimpleMapTest {
         Assert.assertTrue(map.put("Test7", 7));
         Assert.assertTrue(map.put("Test8", 8));
         Assert.assertTrue(map.put("Test9", 9));
-        Assert.assertTrue(map.put("Test10", 10));
-        Assert.assertTrue(map.put("Test11", 11));
-        Assert.assertTrue(map.put("Test12", 12));
-        Assert.assertEquals(Integer.valueOf(12), map.get("Test12"));
         Assert.assertEquals(Integer.valueOf(1), map.get("Test1"));
         Assert.assertEquals(Integer.valueOf(7), map.get("Test7"));
     }
