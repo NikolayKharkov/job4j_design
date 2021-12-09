@@ -43,16 +43,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return hash & (capacity - 1);
     }
 
-    private int indexFor(int hash, int capacity) {
-        return hash & (capacity - 1);
-    }
-
     private void expand() {
         capacity *= 2;
         MapEntry<K, V>[] expandableTable = new MapEntry[capacity];
         for (MapEntry<K, V> el : table) {
             if (el != null) {
-                expandableTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()), capacity)] = el;
+                expandableTable[el.key == null ? 0 : indexFor(hash(el.key.hashCode()))] = el;
             }
         }
         table = expandableTable;
