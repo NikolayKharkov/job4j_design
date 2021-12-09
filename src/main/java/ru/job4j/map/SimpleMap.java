@@ -11,7 +11,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private int iteratorSize = 0;
 
-    private int capacity = 8;
+    private  int capacity = 8;
 
     private int count = 0;
 
