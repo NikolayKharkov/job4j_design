@@ -27,7 +27,6 @@ public class LogFilter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {
