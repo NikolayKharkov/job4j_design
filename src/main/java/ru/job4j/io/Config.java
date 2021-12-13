@@ -15,23 +15,24 @@ public class Config {
     }
 
     public void load() {
-        StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
                     .filter(l -> !l.isEmpty() && !l.startsWith("#"))
-                    .map(l -> checkFormat(l))
+                    .map(this::checkFormat)
                     .forEach(l -> this.values.put(l[0], l[1]));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    private String[] checkFormat(String line) {
-        if (line.split("=").length != 2
-                || line.split("=")[0].isEmpty()
-                || line.split("=")[1].isEmpty()) {
+    public String[] checkFormat(String line) {
+        if (!line.contains("=")) {
             throw new IllegalArgumentException("Not correct format!");
         }
-        return line.split("=");
+        String[] result = line.split("=");
+        if (result.length != 2 || result[0].isEmpty() || result[1].isEmpty()) {
+            throw new IllegalArgumentException("Not correct format!");
+        }
+        return result;
     }
 
     public String value(String key) {
