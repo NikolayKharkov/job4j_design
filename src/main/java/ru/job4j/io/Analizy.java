@@ -35,6 +35,6 @@ public class Analizy {
 
     public static void main(String[] args) {
         Analizy a = new Analizy();
-        a.unavailable("source2.txt", "target2.txt");
+        a.unavailable("test.txt", "target2.txt");
     }
 }
