@@ -11,20 +11,16 @@ public class Analizy {
                     new BufferedOutputStream(
                             new FileOutputStream(target)
                     ))) {
-                List<String> temp = read.lines().collect(Collectors.toList());
-                for (int i = 0; i != temp.size(); i++) {
-                    if (temp.get(i).startsWith("400") || temp.get(i).startsWith("500")) {
-                        String startError = temp.get(i).substring(3).trim();
-                        for (int j = i + 1; j != temp.size(); j++) {
-                            if (!temp.get(j).startsWith("400") && !temp.get(j).startsWith("500")) {
-                                write.println(startError
-                                        + ";"
-                                        + temp.get(j).substring(3).trim()
-                                        + ";");
-                                i = j;
-                                break;
-                            }
-                        }
+                String line = null;
+                StringBuilder log = new StringBuilder();
+                while ((line = read.readLine()) != null) {
+                    if (log.length() == 0 && (line.startsWith("400") || line.startsWith("500"))) {
+                        log.append(line.substring(3).trim() + ";");
+                    }
+                    if (log.length() != 0 && !(line.startsWith("400") || line.startsWith("500"))) {
+                        log.append(line.substring(3).trim() + ";");
+                        write.println(log);
+                        log.setLength(0);
                     }
                 }
             }
