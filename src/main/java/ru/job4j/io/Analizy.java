@@ -14,12 +14,12 @@ public class Analizy {
                 List<String> temp = read.lines().collect(Collectors.toList());
                 for (int i = 0; i != temp.size(); i++) {
                     if (temp.get(i).startsWith("400") || temp.get(i).startsWith("500")) {
-                        String startError = temp.get(i).substring(3, temp.get(i).length()).trim();
+                        String startError = temp.get(i).substring(3).trim();
                         for (int j = i + 1; j != temp.size(); j++) {
                             if (!temp.get(j).startsWith("400") && !temp.get(j).startsWith("500")) {
                                 write.println(startError
                                         + ";"
-                                        + temp.get(j).substring(3, temp.get(j).length()).trim()
+                                        + temp.get(j).substring(3).trim()
                                         + ";");
                                 i = j;
                                 break;
