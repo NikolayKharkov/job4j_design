@@ -14,7 +14,7 @@ public class Search {
             throw new IllegalArgumentException("You must specify the folder and file extension");
         }
 
-        if (args.length == 1) {
+        if (args.length != 1) {
             throw new IllegalArgumentException("You miss specify the folder or file extension.");
         }
 
