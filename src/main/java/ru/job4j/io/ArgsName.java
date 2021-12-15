@@ -26,7 +26,7 @@ public class ArgsName {
             throw new IllegalArgumentException("Not correct format!");
         }
         String[] result = line.split("=");
-        if (result.length != 2 || result[0].isEmpty() || result[1].isEmpty()) {
+        if (result.length != 2 || result[0].isEmpty() || result[1].isEmpty() || !result[0].startsWith("-")) {
             throw new IllegalArgumentException("Not correct format!");
         }
         return result;
