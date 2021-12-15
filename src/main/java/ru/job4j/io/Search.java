@@ -10,12 +10,8 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
 
-        if (args.length == 0) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("You must specify the folder and file extension");
-        }
-
-        if (args.length != 1) {
-            throw new IllegalArgumentException("You miss specify the folder or file extension.");
         }
 
         Path start = Paths.get(args[0]);
