@@ -32,6 +32,11 @@ public class Zip {
 
         ArgsName listArgs = ArgsName.of(args);
 
+        if (!Paths.get(listArgs.get("d")).toFile().exists()
+                || !Paths.get(listArgs.get("d")).toFile().isDirectory()) {
+            throw new IllegalArgumentException("Ziped directory is not exist or it's not a directory");
+        }
+
         List<Path> listPaths = search(Paths.get(listArgs.get("d")),
                 p -> !p.toFile().getName().endsWith(listArgs.get("e")));
 
