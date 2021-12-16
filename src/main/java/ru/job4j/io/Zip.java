@@ -25,15 +25,12 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
+
         if (args.length != 3) {
             throw new IllegalArgumentException("Not correct number of arguments!");
         }
 
         ArgsName listArgs = ArgsName.of(args);
-
-        if (listArgs.get("d").equals(null) || listArgs.get("e").equals(null) || listArgs.get("o").equals(null)) {
-            throw new IllegalArgumentException("Not correct format of arguments!");
-        }
 
         List<Path> listPaths = search(Paths.get(listArgs.get("d")),
                 p -> !p.toFile().getName().endsWith(listArgs.get("e")));
