@@ -35,7 +35,7 @@ public class CSVReader {
                     .collect(Collectors.joining(delimiter)));
         }
 
-        if (out.equals("stdout")) {
+        if ("stdout".equals(out)) {
             result.forEach(System.out::println);
         } else {
             try (PrintWriter write = new PrintWriter(
