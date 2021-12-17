@@ -17,8 +17,8 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
 
     public ConsoleChat(String path, String botAnswers) {
-        if (!Paths.get(botAnswers).toFile().exists()) {
-            throw new IllegalArgumentException("Input botAnswers file not exists!");
+        if (!Paths.get(botAnswers).toFile().exists() || !Paths.get(path).toFile().isDirectory()) {
+            throw new IllegalArgumentException("Input botAnswers file not exists or path is not directory!");
         }
         this.path = path;
         this.botAnswers = botAnswers;
