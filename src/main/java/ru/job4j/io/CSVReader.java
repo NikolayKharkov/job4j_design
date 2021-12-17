@@ -13,13 +13,6 @@ public class CSVReader {
         String out = argsName.get("out");
         String delimiter = argsName.get("delimiter");
         String filter = argsName.get("filter");
-        if (path.toFile().isDirectory() || !path.toFile().exists()) {
-            throw new IllegalArgumentException("Not correct PATH parameter!");
-        }
-
-        if (!out.equals("stdout") && (!Paths.get(out).toFile().exists() || Paths.get(out).toFile().isDirectory())) {
-            throw new IllegalArgumentException("Not correct OUT parameter!");
-        }
 
         List<String> result = new ArrayList<>();
         Scanner scan = new Scanner(path);
@@ -42,19 +35,36 @@ public class CSVReader {
                     .collect(Collectors.joining(delimiter)));
         }
 
-        switch (out) {
-            case "stdout":
-                result.forEach(System.out::println);
-                break;
-            default:
-                try (PrintWriter write = new PrintWriter(
-                        new BufferedOutputStream(
-                                new FileOutputStream(out)
-                        ))) {
-                    result.forEach(write::println);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        if (out.equals("stdout")) {
+            result.forEach(System.out::println);
+        } else {
+            try (PrintWriter write = new PrintWriter(
+                    new BufferedOutputStream(
+                            new FileOutputStream(out)
+                    ))) {
+                result.forEach(write::println);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length != 4) {
+            throw new IllegalArgumentException("Not correct number of arguments");
+        }
+
+        ArgsName listArgs = ArgsName.of(args);
+
+        if (Paths.get(listArgs.get("path")).toFile().isDirectory()
+                || !Paths.get(listArgs.get("path")).toFile().exists()) {
+            throw new IllegalArgumentException("Not correct PATH parameter!");
+        }
+
+        if (!";".equals(listArgs.get("delimiter"))) {
+            throw new IllegalArgumentException("Not correct delimiter!");
+        }
+
+        handle(listArgs);
     }
 }
