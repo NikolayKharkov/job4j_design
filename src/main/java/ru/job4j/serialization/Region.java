@@ -1,7 +1,15 @@
 package ru.job4j.serialization;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "region")
 public class Region {
-    private final String region;
+    @XmlAttribute
+    private String region;
+
+    public Region() {
+
+    }
 
     public Region(String region) {
         this.region = region;

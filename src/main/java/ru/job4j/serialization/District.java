@@ -1,13 +1,25 @@
 package ru.job4j.serialization;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "district")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class District {
-    private final Region region;
-    private final String name;
-    private final boolean republic;
-    private final int population;
-    private final String[] towns;
+    private Region region;
+    @XmlAttribute
+    private String name;
+    @XmlAttribute
+    private boolean republic;
+    @XmlAttribute
+    private int population;
+    @XmlElementWrapper(name = "towns")
+    @XmlElement(name = "town")
+    private String[] towns;
+
+    public District() {
+
+    }
 
     public District(Region region, String name, boolean republic, int population, String[] towns) {
         this.region = region;
