@@ -10,10 +10,15 @@ public class UsageLog4j {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        String n = "Hello log";
+        int i = 14;
+        char cr = 'c';
+        float f = 3.14f;
+        double d = 3.14;
+        long l = 100000000L;
+        boolean b = true;
+        short s = 6;
+        LOG.debug("String n = {}, Char cr = {}, Float = {}, Double = {}, Long l = {}, Boolean = {}, Short s = {}",
+                n, i, cr, f, d, l, b, s);
     }
 }
