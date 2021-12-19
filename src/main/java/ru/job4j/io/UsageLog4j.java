@@ -18,7 +18,8 @@ public class UsageLog4j {
         long l = 100000000L;
         boolean b = true;
         short s = 6;
-        LOG.debug("String n = {}, Char cr = {}, Float = {}, Double = {}, Long l = {}, Boolean = {}, Short s = {}",
-                n, i, cr, f, d, l, b, s);
+        byte bt = 127;
+        LOG.debug("String n = {}, Char cr = {}, Float = {}, Double = {}, Long l = {}, Boolean = {}, Short s = {}, Byte = {}",
+                n, i, cr, f, d, l, b, s, bt);
     }
 }
