@@ -76,15 +76,19 @@ where c.id is null;
 
 create view cars_info
     as select c.name as car_name,
-              b.name as body_name
-              ,e.name as engine_name
-              ,t.name as transmission_name
+              b.name as body_name,
+              e.name as engine_name,
+              t.name as transmission_name
 	   from cars c
 	   join bodies b on b.id = c.body_id
        join engines e on e.id = c.engine_id
-	   join transmissions t on t.id = c.transmission_id;
+	   join transmissions t on t.id = c.transmission_id
+	   where b.id = 3
+	         and e.id = 1
+	         and t.id = 2
+	         and lower(c.name) like '%2%';
 	   
-	   
+
 select * from cars_info;
 
 
