@@ -22,9 +22,23 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            rd.lines().forEach(l -> users.add(new User(l.split(";")[0], l.split(";")[1])));
+            rd.lines()
+                    .filter(l -> !l.isEmpty())
+                    .map(this::checkFormat)
+                    .forEach(l -> users.add(new User(l[0], l[1])));
         }
         return users;
+    }
+
+    private String[] checkFormat(String line) {
+        if (!line.contains(";")) {
+            throw new IllegalArgumentException("Not correct format!");
+        }
+        String[] result = line.split(";");
+        if (result.length != 2 || result[0].isEmpty() || result[1].isEmpty()) {
+            throw new IllegalArgumentException("Not correct format!");
+        }
+        return result;
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
