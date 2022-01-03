@@ -1,7 +1,5 @@
 package ru.job4j.gc;
 
-import org.openjdk.jol.info.ClassLayout;
-
 public class GCDemo {
 
     private static final long KB = 1000;
@@ -23,7 +21,6 @@ public class GCDemo {
         for (int i = 0; i < 10000; i++) {
             new User("N" + i, i, true);
         }
-
         info();
     }
 }
