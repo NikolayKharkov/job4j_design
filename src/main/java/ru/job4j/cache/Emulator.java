@@ -14,11 +14,16 @@ public class Emulator {
         this.dirFileCache = new DirFileCache(dir);
     }
 
-    public void load(String fileName) {
+    public void load(String fileName) throws Exception {
         System.out.println(dirFileCache.load(fileName));
     }
 
-    public void get(String fileName) {
+    public void get(String fileName) throws Exception {
         System.out.println(dirFileCache.get(fileName));
+    }
+
+    public static void main(String[] args) throws Exception {
+        Emulator a = new Emulator("C:\\cache");
+        a.load("names.txt");
     }
 }
