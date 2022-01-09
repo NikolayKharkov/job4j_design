@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 public class Emulator {
     private DirFileCache dirFileCache;
 
-    public Emulator(String dir)  {
+    public Emulator(String dir) {
         if (!Paths.get(dir).toFile().exists()
                 || !Paths.get(dir).toFile().isDirectory()
                 || !Paths.get(dir).toFile().exists()) {
