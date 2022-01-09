@@ -3,22 +3,28 @@ package ru.job4j.cache;
 import java.nio.file.Paths;
 
 public class Emulator {
-    private DirFileCache dirFileCache;
 
-    public Emulator(String dir) {
-        if (!Paths.get(dir).toFile().exists()
-                || !Paths.get(dir).toFile().isDirectory()
-                || !Paths.get(dir).toFile().exists()) {
+    public void load(String dir, String fileName) {
+        if (!Paths.get(dir).toFile().exists() || !Paths.get(dir).toFile().isDirectory()) {
             throw new IllegalArgumentException("Not correct input directory!");
         }
-        this.dirFileCache = new DirFileCache(dir);
+
+        if (!Paths.get(dir, fileName).toFile().exists() || !Paths.get(dir, fileName).toFile().isFile()) {
+            throw new IllegalArgumentException("Input file not exists or it's not a file!");
+        }
+        DirFileCache fileCache = new DirFileCache(dir);
+        System.out.println(fileCache.load(fileName));
     }
 
-    public void load(String fileName) throws Exception {
-        System.out.println(dirFileCache.load(fileName));
-    }
+    public void get(String dir, String fileName) {
+        if (!Paths.get(dir).toFile().exists() || !Paths.get(dir).toFile().isDirectory()) {
+            throw new IllegalArgumentException("Not correct input directory!");
+        }
 
-    public void get(String fileName) throws Exception {
-        System.out.println(dirFileCache.get(fileName));
+        if (!Paths.get(dir, fileName).toFile().exists() || !Paths.get(dir, fileName).toFile().isFile()) {
+            throw new IllegalArgumentException("Input file not exists or it's not a file!");
+        }
+        DirFileCache fileCache = new DirFileCache(dir);
+        System.out.println(fileCache.get(fileName));
     }
 }
