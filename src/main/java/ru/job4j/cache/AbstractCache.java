@@ -13,10 +13,12 @@ public abstract class AbstractCache<K, V> {
     }
 
     public V get(K key) throws Exception {
-        if (cache.getOrDefault(key, null).get() == null) {
-            put(key, load(key));
+        V result = cache.getOrDefault(key, null).get();
+        if (result == null) {
+            result = load(key);
+            put(key, result);
         }
-        return cache.get(key).get();
+        return result;
     }
 
     protected abstract V load(K key) throws Exception;

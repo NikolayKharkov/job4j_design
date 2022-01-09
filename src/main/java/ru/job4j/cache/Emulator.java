@@ -21,9 +21,4 @@ public class Emulator {
     public void get(String fileName) throws Exception {
         System.out.println(dirFileCache.get(fileName));
     }
-
-    public static void main(String[] args) throws Exception {
-        Emulator a = new Emulator("C:\\cache");
-        a.load("names.txt");
-    }
 }
