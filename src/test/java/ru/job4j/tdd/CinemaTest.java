@@ -50,4 +50,35 @@ public class CinemaTest {
         Ticket ticket = cinema.buy(account, 1, 1, date);
         assertNull(ticket);
     }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenBuyButSeatIsOccupied() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 10, 10, 23, 00);
+        Ticket ticket = cinema.buy(account, 1, 1, date);
+        assertThat(ticket, is(new Ticket3D()));
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenBuyButDateNotValid() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(1876, 10, 10, 23, 00);
+        Ticket ticket = cinema.buy(account, 1, 1, date);
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenBuyButSeatNotValid() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 10, 10, 23, 00);
+        Ticket ticket = cinema.buy(account, 100, -15, date);
+    }
 }
