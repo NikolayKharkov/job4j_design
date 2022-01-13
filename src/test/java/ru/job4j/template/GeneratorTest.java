@@ -1,17 +1,14 @@
 package ru.job4j.template;
 
-import junit.framework.TestCase;
 import org.junit.Ignore;
 import org.junit.Test;
-import ru.job4j.tdd.*;
 
-import java.util.Calendar;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class GeneratorTest extends TestCase {
+public class GeneratorTest {
 
     @Ignore
     @Test
