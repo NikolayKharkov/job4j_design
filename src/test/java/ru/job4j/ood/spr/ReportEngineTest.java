@@ -40,19 +40,20 @@ public class ReportEngineTest {
         store.add(worker3);
         store.add(worker4);
         store.add(worker5);
-        Comparator sortBySalary = new SortBySalary().reversed();
-        Report engine = new ReportForHR(store, sortBySalary);
-        StringBuilder expect = new StringBuilder()
-                .append("Name; Salary;")
-                .append(System.lineSeparator());
-        List<Employee> sortedEmployees = store.findBy(e -> true);
-        Collections.sort(sortedEmployees, sortBySalary);
-        for (Employee employee : sortedEmployees) {
-            expect.append(employee.getName()).append(";")
-                    .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
-        }
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        Report engine = new ReportForHR(store);
+        String exp = "Name; Salary;"
+                + System.lineSeparator()
+                + "Misha;125.0;"
+                + System.lineSeparator()
+                + "Kate;123.0;"
+                + System.lineSeparator()
+                + "Ivan;100.0;"
+                + System.lineSeparator()
+                + "Anna;87.0;"
+                + System.lineSeparator()
+                + "Max;35.0;"
+                + System.lineSeparator();
+        assertThat(engine.generate(em -> true), is(exp));
     }
 
     @Test
