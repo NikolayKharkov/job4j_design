@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 
-public class Food {
+public class Food implements Comparable<Food> {
     private String name;
     private LocalDate createDate;
     private LocalDate expiryDate;
@@ -96,6 +96,11 @@ public class Food {
                 + ", price=" + price
                 + ", discount=" + discount
                 + '}';
+    }
+
+    @Override
+    public int compareTo(Food o) {
+        return name.compareTo(o.getName());
     }
 }
 
