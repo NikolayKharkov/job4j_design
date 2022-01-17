@@ -8,6 +8,7 @@ public class ParkingSpace {
     private final List<Car> trackCars;
     private int spacesForLight;
     private int spacesForTrack;
+    private static final int SPACEONE = 1;
 
     public ParkingSpace(int spacesForLight, int spacesForTrack) {
         this.spacesForLight = spacesForLight;
@@ -18,7 +19,7 @@ public class ParkingSpace {
 
     public boolean parkCar(Car car) {
         boolean result = false;
-        if (car.getSize() == 1) {
+        if (car.getSize() == SPACEONE) {
             result = parkInLight(car);
         } else {
             result = parkInTrack(car);
@@ -42,8 +43,8 @@ public class ParkingSpace {
 
     private boolean parkInTrack(Car car) {
         boolean result = false;
-        if (spacesForTrack >= 1) {
-            spacesForTrack -= 1;
+        if (spacesForTrack >= SPACEONE) {
+            spacesForTrack -= SPACEONE;
             trackCars.add(car);
             result = true;
         }
@@ -52,7 +53,7 @@ public class ParkingSpace {
 
     public boolean removeCar(Car car) {
         boolean result = false;
-        if (car.getSize() == 1) {
+        if (car.getSize() == SPACEONE) {
             result = removeFromLight(car);
         } else {
             result = removeFromTrack(car);
@@ -82,7 +83,7 @@ public class ParkingSpace {
             if (trackCars.get(i).equals(car)) {
                 result = true;
                 trackCars.remove(i);
-                spacesForTrack -= 1;
+                spacesForTrack -= SPACEONE;
                 break;
             }
         }
