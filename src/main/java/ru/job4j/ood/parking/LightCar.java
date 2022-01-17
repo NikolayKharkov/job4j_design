@@ -4,16 +4,15 @@ import java.util.Objects;
 
 public class LightCar extends Car {
 
-    private int size;
+    public static final int SIZE = 1;
 
     public LightCar(String name) {
         super(name);
-        this.size = 1;
     }
 
     @Override
     int getSize() {
-        return size;
+        return SIZE;
     }
 
     @Override
@@ -25,11 +24,11 @@ public class LightCar extends Car {
             return false;
         }
         Car car = (Car) o;
-        return size == car.getSize() && Objects.equals(super.getName(), car.getName());
+        return SIZE == car.getSize() && Objects.equals(super.getName(), car.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.getName(), size);
+        return Objects.hash(super.getName(), SIZE);
     }
 }
