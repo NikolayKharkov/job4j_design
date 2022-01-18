@@ -29,4 +29,10 @@ public class ControllQuality {
         }
         return result;
     }
+
+    public void resort() {
+        List<Food> resorting = getProducts();
+        storages.stream().forEach(Storage::removeAllProducts);
+        resorting.stream().forEach(food -> putProduct(food));
+    }
 }

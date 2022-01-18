@@ -30,4 +30,9 @@ public class Warehouse implements Storage {
     public List<Food> getFoods() {
         return List.copyOf(storage);
     }
+
+    @Override
+    public void removeAllProducts() {
+        this.storage = new ArrayList<>();
+    }
 }

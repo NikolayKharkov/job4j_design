@@ -30,4 +30,9 @@ public class Trash implements Storage {
     public List<Food> getFoods() {
         return List.copyOf(trash);
     }
+
+    @Override
+    public void removeAllProducts() {
+        this.trash = new ArrayList<>();
+    }
 }

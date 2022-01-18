@@ -33,4 +33,10 @@ public class Shop implements Storage {
     public List<Food> getFoods() {
         return List.copyOf(shop);
     }
+
+    @Override
+    public void removeAllProducts() {
+        this.shop = new ArrayList<>();
+
+    }
 }

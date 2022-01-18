@@ -19,4 +19,6 @@ public interface Storage {
     }
 
     public List<Food> getFoods();
+
+    public void removeAllProducts();
 }
